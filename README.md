@@ -269,18 +269,18 @@ Nilai RMSE sebesar 1.0202 menandakan bahwa rata-rata kesalahan prediksi rating s
 
 **Contoh Hasil Rekomendasi Personalized (User ID: 100):**
 
-| movieId | title                                         | genres                                      |
-|---------|-----------------------------------------------|---------------------------------------------|
-| 48      | Pocahontas (1995)                             | Animation Children Drama Musical Romance     |
-| 110     | Braveheart (1995)                             | Action Drama War                            |
-| 161     | Crimson Tide (1995)                           | Drama Thriller War                          |
-| 318     | Shawshank Redemption, The (1994)              | Crime Drama                                 |
-| 356     | Forrest Gump (1994)                           | Comedy Drama Romance War                    |
-| 1035    | Sound of Music, The (1965)                    | Musical Romance                             |
-| 1287    | Ben-Hur (1959)                                | Action Adventure Drama                      |
-| 1380    | Grease (1978)                                 | Comedy Musical Romance                      |
-| 3753    | Patriot, The (2000)                           | Action Drama War                            |
-| 5618    | Spirited Away (Sen to Chihiro no kamikakushi) | Adventure Animation Fantasy                 |
+| movieId | title                        | genres                                         |
+|---------|------------------------------|------------------------------------------------|
+| 198     | Strange Days (1995)          | Action|Crime|Drama|Mystery|Sci-Fi|Thriller   |
+| 261     | Little Women (1994)          | Drama                                          |
+| 300     | Quiz Show (1994)             | Drama                                          |
+| 441     | Dazed and Confused (1993)    | Comedy                                         |
+| 1035    | Sound of Music, The (1965)   | Musical|Romance                                 |
+| 1959    | Out of Africa (1985)         | Drama|Romance                                   |
+| 2114    | Outsiders, The (1983)        | Drama                                          |
+| 2746    | Little Shop of Horrors (1986)| Comedy|Horror|Musical                           |
+| 5991    | Chicago (2002)               | Comedy|Crime|Drama|Musical                      |
+| 60074   | Hancock (2008)               | Action|Adventure|Comedy|Crime|Fantasy           |
 
 *Gambar: Tabel hasil rekomendasi CF untuk user ID 100*
 
@@ -302,14 +302,14 @@ Nilai RMSE sebesar 1.0202 menandakan bahwa rata-rata kesalahan prediksi rating s
 | Personalisasi        | Rendah                                | Tinggi                                |
 | Kelebihan            | Cocok untuk item baru                 | Cocok untuk pengguna aktif            |
 | Kekurangan           | Tidak mempertimbangkan preferensi     | Membutuhkan data rating yang memadai  |
-| Metrik Evaluasi      | Subjektif (kualitatif)                | RMSE = 1.0097                         |
+| Metrik Evaluasi      | Subjektif (kualitatif)                | RMSE = 1.0202                        |
 
 ---
 
 ### 4. Kesimpulan Evaluasi
 
 - **CBF** memberikan hasil rekomendasi yang relevan secara konten, namun belum sepenuhnya personal.
-- **CF** memiliki performa yang lebih baik dalam memberikan rekomendasi yang sesuai preferensi pengguna, dibuktikan dengan nilai RMSE yang relatif kecil (1.0097).
+- **CF** memiliki performa yang lebih baik dalam memberikan rekomendasi yang sesuai preferensi pengguna, dibuktikan dengan nilai RMSE yang relatif kecil (1.0202).
 - Pemilihan metode terbaik dapat disesuaikan dengan kebutuhan: CBF untuk film baru, CF untuk rekomendasi yang lebih personal.
 
 ---
