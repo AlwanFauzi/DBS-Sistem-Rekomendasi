@@ -269,18 +269,19 @@ Nilai RMSE sebesar 1.0202 menandakan bahwa rata-rata kesalahan prediksi rating s
 
 **Contoh Hasil Rekomendasi Personalized (User ID: 100):**
 
-| movieId | title                        | genres                                         |
-|---------|------------------------------|------------------------------------------------|
-| 198     | Strange Days (1995)          | Action|Crime|Drama|Mystery|Sci-Fi|Thriller   |
-| 261     | Little Women (1994)          | Drama                                          |
-| 300     | Quiz Show (1994)             | Drama                                          |
-| 441     | Dazed and Confused (1993)    | Comedy                                         |
-| 1035    | Sound of Music, The (1965)   | Musical|Romance                                 |
-| 1959    | Out of Africa (1985)         | Drama|Romance                                   |
-| 2114    | Outsiders, The (1983)        | Drama                                          |
-| 2746    | Little Shop of Horrors (1986)| Comedy|Horror|Musical                           |
-| 5991    | Chicago (2002)               | Comedy|Crime|Drama|Musical                      |
-| 60074   | Hancock (2008)               | Action|Adventure|Comedy|Crime|Fantasy           |
+| movieId | title                         | genres                                                |
+| ------- | ----------------------------- | ---------------------------------------------------- |
+| 198     | Strange Days (1995)           | Action \| Crime \| Drama \| Mystery \| Sci-Fi \| Thriller |
+| 261     | Little Women (1994)           | Drama                                                 |
+| 300     | Quiz Show (1994)              | Drama                                                 |
+| 441     | Dazed and Confused (1993)     | Comedy                                                |
+| 1035    | Sound of Music, The (1965)    | Musical \| Romance                                    |
+| 1959    | Out of Africa (1985)          | Drama \| Romance                                      |
+| 2114    | Outsiders, The (1983)         | Drama                                                 |
+| 2746    | Little Shop of Horrors (1986) | Comedy \| Horror \| Musical                           |
+| 5991    | Chicago (2002)                | Comedy \| Crime \| Drama \| Musical                   |
+| 60074   | Hancock (2008)                | Action \| Adventure \| Comedy \| Crime \| Fantasy     |
+
 
 *Gambar: Tabel hasil rekomendasi CF untuk user ID 100*
 
