@@ -69,9 +69,36 @@ def recommend_movies_cbf(title, num_recommendations=10):
     movie_indices = [i[0] for i in sim_scores]
     return movies_df.iloc[movie_indices][['title', 'genres']]
 
-# Contoh penggunaan CBF
+# --- Precision@K untuk evaluasi CBF ---
+def precision_at_k(recommended_titles, reference_title, k=5):
+    ref_genres = set(movies_df[movies_df['title'] == reference_title]['genres'].iloc[0].split('|'))
+    relevant = 0
+    for title in recommended_titles[:k]:
+        rec_genres = set(movies_df[movies_df['title'] == title]['genres'].iloc[0].split('|'))
+        if len(ref_genres & rec_genres) > 0:
+            relevant += 1
+    return relevant / k
+
+# --- Recall@K untuk evaluasi CBF ---
+def recall_at_k(recommended_titles, reference_title, k=5):
+    ref_genres = set(movies_df[movies_df['title'] == reference_title]['genres'].iloc[0].split('|'))
+    total_relevant = len(ref_genres)
+    found_genres = set()
+    for title in recommended_titles[:k]:
+        rec_genres = set(movies_df[movies_df['title'] == title]['genres'].iloc[0].split('|'))
+        found_genres.update(ref_genres & rec_genres)
+    return len(found_genres) / total_relevant if total_relevant > 0 else 0
+
+# Contoh penggunaan CBF dan evaluasi
 print("\nRekomendasi CBF untuk 'Toy Story (1995)':")
-print(recommend_movies_cbf('Toy Story (1995)', 10))
+cbf_result = recommend_movies_cbf('Toy Story (1995)', 10)
+print(cbf_result)
+
+recommended_titles = cbf_result['title'].tolist()
+precision5 = precision_at_k(recommended_titles, 'Toy Story (1995)', k=5)
+recall5 = recall_at_k(recommended_titles, 'Toy Story (1995)', k=5)
+print(f"\nPrecision@5: {precision5:.2f}")
+print(f"Recall@5: {recall5:.2f}")
 
 # --- Collaborative Filtering (RecommenderNet) ---
 X = ratings[['user', 'movie']].values

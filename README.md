@@ -50,8 +50,21 @@ Untuk menjawab permasalahan dan mencapai tujuan proyek, digunakan dua pendekatan
 
 Dataset yang digunakan dalam proyek ini adalah subset dari **MovieLens Dataset** yang terdiri dari dua file utama:
 
-- **movies.csv**: Berisi informasi mengenai film, seperti `movieId`, `title`, dan `genres`.
-- **ratings.csv**: Berisi data interaksi pengguna berupa `userId`, `movieId`, `rating`, dan `timestamp`.
+- **movies.csv**: Berisi informasi mengenai film.
+- **ratings.csv**: Berisi data interaksi pengguna dengan film.
+
+### Deskripsi Fitur Dataset
+
+**movies.csv**
+- `movieId`: ID unik untuk setiap film. Digunakan sebagai kunci relasi antara data film dan data rating.
+- `title`: Judul lengkap film beserta tahun rilis. Digunakan untuk menampilkan nama film pada hasil rekomendasi.
+- `genres`: Daftar genre yang dimiliki film, dipisahkan dengan tanda "|". Fitur ini digunakan sebagai dasar perhitungan kemiripan antar film pada Content-Based Filtering.
+
+**ratings.csv**
+- `userId`: ID unik untuk setiap pengguna. Digunakan untuk mengidentifikasi pengguna dalam proses rekomendasi.
+- `movieId`: ID film yang dirating oleh pengguna (relasi ke movies.csv).
+- `rating`: Nilai rating yang diberikan pengguna terhadap film, dalam skala 0.5 hingga 5.0. Digunakan sebagai target prediksi pada Collaborative Filtering.
+- `timestamp`: Waktu (dalam format UNIX timestamp) saat rating diberikan. Fitur ini tidak digunakan dalam pemodelan dan dihapus pada tahap data preparation.
 
 ### Insight dari Data Understanding dan EDA
 
@@ -185,7 +198,9 @@ Pada proyek ini digunakan dua pendekatan sistem rekomendasi, yaitu Content-Based
 
 ### 1. Evaluasi Content-Based Filtering (CBF)
 
-Pendekatan CBF memberikan rekomendasi berdasarkan kemiripan fitur antar film, khususnya genre. Karena CBF tidak memprediksi nilai rating numerik, evaluasi dilakukan secara **kualitatif** dengan meninjau relevansi hasil rekomendasi.
+Pendekatan CBF memberikan rekomendasi berdasarkan kemiripan fitur antar film, khususnya genre. Evaluasi dilakukan secara **kualitatif** dan **kuantitatif**.
+
+#### Evaluasi Kualitatif
 
 **Contoh Hasil Rekomendasi:**
 
@@ -208,6 +223,21 @@ Film Referensi: **Toy Story (1995)**
 
 **Insight:**  
 Hasil rekomendasi didominasi oleh film-film dengan genre serupa (Animation, Children, Comedy, Fantasy), sehingga relevansi rekomendasi dapat dianggap baik secara subjektif.
+
+#### Evaluasi Kuantitatif
+
+- **Precision@K** digunakan untuk mengukur proporsi rekomendasi teratas yang relevan dengan film referensi berdasarkan genre.
+- Rumus:  
+  (jumlah rekomendasi relevan dalam top-K) ÷ K
+- Hasil Precision@5 = 1.00, artinya 100% dari 5 rekomendasi teratas memiliki genre yang sama dengan film referensi.
+
+- **Recall@K** digunakan untuk mengukur seberapa banyak genre dari film referensi yang berhasil terwakili dalam rekomendasi top-K.
+- Rumus:  
+  (jumlah genre film referensi yang ada di top-K) ÷ (jumlah genre film referensi)
+- Hasil: Recall@5 = 1.00, artinya seluruh genre dari film referensi berhasil muncul pada 5 rekomendasi teratas.
+
+**Interpretasi:**  
+Nilai Precision@5 dan Recall@5 yang tinggi (1.00) menunjukkan bahwa sistem CBF mampu memberikan rekomendasi yang sangat relevan dan mencakup seluruh genre utama dari film referensi pada rekomendasi teratas.
 
 **Kelebihan CBF:**
 - Tidak bergantung pada rating pengguna.
@@ -232,10 +262,10 @@ RMSE = √(1/n ∑(yi - ŷi)²)
 - `n` : jumlah sampel  
 
 **Hasil RMSE:**
-- RMSE = **1.0097**
+- RMSE = **1.0202**
 
 **Interpretasi:**  
-Nilai RMSE sebesar 1.0097 menandakan bahwa rata-rata kesalahan prediksi rating sekitar 1 poin pada skala rating 0.5 sampai 5.0. Nilai ini menunjukkan performa yang cukup baik untuk model dengan dataset berskala menengah dan arsitektur sederhana.
+Nilai RMSE sebesar 1.0202 menandakan bahwa rata-rata kesalahan prediksi rating sekitar 1 poin pada skala rating 0.5 sampai 5.0. Nilai ini menunjukkan performa yang cukup baik untuk model dengan dataset berskala menengah dan arsitektur sederhana.
 
 **Contoh Hasil Rekomendasi Personalized (User ID: 100):**
 
