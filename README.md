@@ -59,19 +59,27 @@ Dataset yang digunakan dalam proyek ini adalah subset dari **MovieLens Dataset**
    - `movies.csv` memiliki **10.329 entri** dan terdiri dari 3 kolom: `movieId`, `title`, dan `genres`.
    - `ratings.csv` memiliki **105.339 entri** dengan 4 kolom: `userId`, `movieId`, `rating`, dan `timestamp`.
 
-2. **Statistik Deskriptif dari ratings.csv**
+2. **Kondisi Data**
+   - **Missing Values:**  
+     Berdasarkan hasil `.isnull().sum()` pada kedua dataset, **tidak ditemukan missing values** pada kolom manapun. Hal ini memastikan seluruh data dapat langsung digunakan tanpa perlu proses imputasi atau penghapusan baris/kolom.
+   - **Duplikasi:**  
+     Tidak ditemukan data duplikat pada kedua dataset setelah dilakukan pengecekan. Setiap baris pada `movies.csv` dan `ratings.csv` merepresentasikan entitas unik.
+   - **Outlier:**  
+     Pada data rating, tidak ditemukan outlier yang mencolok karena seluruh nilai rating berada pada rentang yang valid (0.5 hingga 5.0) sesuai standar MovieLens.
+
+3. **Statistik Deskriptif dari ratings.csv**
    - **Rentang rating:** dari 0.5 hingga 5.0.
    - **Rata-rata rating:** sekitar 3.52, menunjukkan kecenderungan pengguna memberikan penilaian positif terhadap film.
    - **Mayoritas rating** berada di antara 3.0 hingga 4.0, mencerminkan bahwa pengguna cenderung tidak memberikan penilaian ekstrem (terlalu rendah atau terlalu tinggi).
 
-3. **Distribusi Rating Film**
+4. **Distribusi Rating Film**
    - ![alt text](rating.png)
    - **Insight:**
      - Rating 4.0 adalah yang paling umum diberikan.
      - Jumlah rating menurun signifikan untuk nilai rendah seperti 0.5–2.0, yang menunjukkan pengguna jarang memberikan rating negatif.
      - Kurva KDE menunjukkan distribusi yang miring ke kiri, menandakan kecenderungan optimistik dalam penilaian.
 
-4. **Distribusi Genre Film**
+5. **Distribusi Genre Film**
    - ![alt text](genre.png)
    - **Insight:**
      - **Drama** adalah genre yang paling banyak muncul, diikuti oleh **Comedy**, **Thriller**, dan **Romance**.
@@ -84,8 +92,6 @@ Pada tahap ini dilakukan beberapa proses persiapan data agar dapat digunakan sec
 
 - **movies.csv**: Berisi informasi mengenai film, seperti `movieId`, `title`, dan `genres`.
 - **ratings.csv**: Berisi data interaksi pengguna berupa `userId`, `movieId`, `rating`, dan `timestamp`.
-
-### 1. Pembersihan dan Persiapan Dataset
 
 Beberapa tahapan yang dilakukan:
 
@@ -102,14 +108,20 @@ Pada dataset `movies.csv`, kolom `genres` berisi genre film yang dipisahkan oleh
 **Alasan:**  
 Genre film merupakan representasi fitur utama untuk pendekatan CBF, sehingga perlu diubah ke format numerik agar bisa dihitung tingkat kesamaannya.
 
-#### c. Menyiapkan Data untuk Collaborative Filtering (CF)
-Untuk CF, digunakan data `ratings.csv`. Proses persiapan meliputi:
+#### c. Menghapus Kolom Timestamp dari ratings.csv
+Pada dataset `ratings.csv`, kolom `timestamp` dihapus karena tidak digunakan dalam proses pemodelan maupun analisis lebih lanjut.
+
+- **Langkah:**  
+  Menghapus kolom `timestamp` menggunakan `ratings_df.drop('timestamp', axis=1)`.
+
+#### d. Menyiapkan Data untuk Collaborative Filtering (CF)
+Untuk CF, digunakan data `ratings.csv` yang sudah dibersihkan. Proses persiapan meliputi:
 
 - **Encoding ID:** Menggunakan `LabelEncoder` untuk mengubah nilai `userId` dan `movieId` menjadi integer yang lebih efisien untuk digunakan dalam model deep learning.
 - **Normalisasi Rating:** Rating diformat dalam skala 0.5 - 5.0, dan akan digunakan untuk prediksi skor dalam model CF.
 - **Pembagian Dataset:** Dataset dibagi menjadi data train dan test dengan proporsi 80:20 untuk proses pelatihan dan evaluasi.
 
-#### d. Mapping ID ke Nama Film
+#### e. Mapping ID ke Nama Film
 Agar hasil rekomendasi lebih mudah dipahami, dibuat mapping dictionary antara `movieId` dengan `title` untuk mengubah ID menjadi nama film saat menampilkan hasil rekomendasi.
 
 ## Modeling
@@ -220,10 +232,10 @@ RMSE = √(1/n ∑(yi - ŷi)²)
 - `n` : jumlah sampel  
 
 **Hasil RMSE:**
-- RMSE = **1.0273**
+- RMSE = **1.0097**
 
 **Interpretasi:**  
-Nilai RMSE sebesar 1.0273 menandakan bahwa rata-rata kesalahan prediksi rating sekitar 1 poin pada skala rating 0.5 sampai 5.0. Nilai ini menunjukkan performa yang cukup baik untuk model dengan dataset berskala menengah dan arsitektur sederhana.
+Nilai RMSE sebesar 1.0097 menandakan bahwa rata-rata kesalahan prediksi rating sekitar 1 poin pada skala rating 0.5 sampai 5.0. Nilai ini menunjukkan performa yang cukup baik untuk model dengan dataset berskala menengah dan arsitektur sederhana.
 
 **Contoh Hasil Rekomendasi Personalized (User ID: 100):**
 
