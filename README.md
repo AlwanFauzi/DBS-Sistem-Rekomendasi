@@ -213,13 +213,11 @@ Untuk pendekatan CF dengan RecommenderNet, digunakan **Root Mean Squared Error (
 
 **Formula RMSE:**
 
-\[
-\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-\]
+RMSE = √(1/n ∑(yi - ŷi)²)
 
-- \( y_i \): nilai rating aktual  
-- \( \hat{y}_i \): nilai prediksi rating  
-- \( n \): jumlah sampel  
+- `yi` : nilai rating aktual
+- `ŷi` : nilai prediksi rating
+- `n` : jumlah sampel  
 
 **Hasil RMSE:**
 - RMSE = **1.0273**
