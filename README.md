@@ -272,7 +272,7 @@ Nilai RMSE sebesar 1.0097 menandakan bahwa rata-rata kesalahan prediksi rating s
 | Personalisasi        | Rendah                                | Tinggi                                |
 | Kelebihan            | Cocok untuk item baru                 | Cocok untuk pengguna aktif            |
 | Kekurangan           | Tidak mempertimbangkan preferensi     | Membutuhkan data rating yang memadai  |
-| Metrik Evaluasi      | Subjektif (kualitatif)                | RMSE = 1.0273                         |
+| Metrik Evaluasi      | Subjektif (kualitatif)                | RMSE = 1.0097                         |
 
 ---
 
