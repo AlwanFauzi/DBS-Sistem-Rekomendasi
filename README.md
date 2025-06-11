@@ -279,7 +279,7 @@ Nilai RMSE sebesar 1.0097 menandakan bahwa rata-rata kesalahan prediksi rating s
 ### 4. Kesimpulan Evaluasi
 
 - **CBF** memberikan hasil rekomendasi yang relevan secara konten, namun belum sepenuhnya personal.
-- **CF** memiliki performa yang lebih baik dalam memberikan rekomendasi yang sesuai preferensi pengguna, dibuktikan dengan nilai RMSE yang relatif kecil (1.0273).
+- **CF** memiliki performa yang lebih baik dalam memberikan rekomendasi yang sesuai preferensi pengguna, dibuktikan dengan nilai RMSE yang relatif kecil (1.0097).
 - Pemilihan metode terbaik dapat disesuaikan dengan kebutuhan: CBF untuk film baru, CF untuk rekomendasi yang lebih personal.
 
 ---
