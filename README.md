@@ -48,24 +48,35 @@ Untuk menjawab permasalahan dan mencapai tujuan proyek, digunakan dua pendekatan
 
 ## Data Understanding
 
-Dataset yang digunakan dalam proyek ini adalah **The Movies Dataset** dari [Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset), yang merupakan bagian dari Full MovieLens Dataset. Dataset ini mencakup metadata dari lebih dari 45.000 film serta 26 juta rating pengguna.
+Dataset yang digunakan dalam proyek ini adalah subset dari **MovieLens Dataset** yang terdiri dari dua file utama:
 
-### File yang digunakan:
-- `movies_metadata.csv`: Berisi informasi umum film seperti judul, genre, sinopsis (`overview`), tanggal rilis, anggaran, pendapatan, dan bahasa.
-- `credits.csv`: Berisi informasi pemeran (`cast`) dan kru (`crew`) untuk setiap film, dalam format string JSON.
-- `keywords.csv`: Berisi kata kunci yang relevan dengan tiap film, juga dalam format string JSON.
-- `ratings_small.csv`: Subset kecil dari 100.000 rating pengguna yang dapat digunakan jika ingin mencoba pendekatan Collaborative Filtering sederhana.
+- **movies.csv**: Berisi informasi mengenai film, seperti `movieId`, `title`, dan `genres`.
+- **ratings.csv**: Berisi data interaksi pengguna berupa `userId`, `movieId`, `rating`, dan `timestamp`.
 
-### Beberapa fitur penting:
-- `title`: Judul film
-- `overview`: Ringkasan cerita film
-- `genres`: Genre film, dalam format JSON
-- `keywords`: Kata kunci deskriptif terkait isi film
-- `cast`: Nama-nama pemeran utama
-- `crew`: Informasi kru seperti sutradara
-- `release_date`: Tanggal rilis
-- `id`: ID film yang digunakan untuk penggabungan antar file
+### Insight dari Data Understanding dan EDA
 
+1. **Struktur Dataset**
+   - `movies.csv` memiliki **10.329 entri** dan terdiri dari 3 kolom: `movieId`, `title`, dan `genres`.
+   - `ratings.csv` memiliki **105.339 entri** dengan 4 kolom: `userId`, `movieId`, `rating`, dan `timestamp`.
+
+2. **Statistik Deskriptif dari ratings.csv**
+   - **Rentang rating:** dari 0.5 hingga 5.0.
+   - **Rata-rata rating:** sekitar 3.52, menunjukkan kecenderungan pengguna memberikan penilaian positif terhadap film.
+   - **Mayoritas rating** berada di antara 3.0 hingga 4.0, mencerminkan bahwa pengguna cenderung tidak memberikan penilaian ekstrem (terlalu rendah atau terlalu tinggi).
+
+3. **Distribusi Rating Film**
+   - ![alt text](rating.png)
+   - **Insight:**
+     - Rating 4.0 adalah yang paling umum diberikan.
+     - Jumlah rating menurun signifikan untuk nilai rendah seperti 0.5–2.0, yang menunjukkan pengguna jarang memberikan rating negatif.
+     - Kurva KDE menunjukkan distribusi yang miring ke kiri, menandakan kecenderungan optimistik dalam penilaian.
+
+4. **Distribusi Genre Film**
+   - ![alt text](genre.png)
+   - **Insight:**
+     - **Drama** adalah genre yang paling banyak muncul, diikuti oleh **Comedy**, **Thriller**, dan **Romance**.
+     - Genre seperti **IMAX**, **Film-Noir**, dan **Western** memiliki jumlah film yang relatif sedikit.
+     - Keberagaman genre ini menjadi potensi penting untuk Content-Based Filtering, karena bisa dimanfaatkan untuk menghitung kemiripan antar film berdasarkan genre.
 
 ## Data Preparation
 
